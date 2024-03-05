@@ -56,14 +56,14 @@ const TSPlot = ({ params, setLoadTime }) => {
       ];
 
       const layout = {
-        title: "Data Plot",
+        title: params?.name || "Timeseries Plot",
         xaxis: { title: "Time" },
         yaxis: { title: "Value" },
       };
 
       Plotly.newPlot(plotContainerRef.current, plotData, layout);
     }
-  }, [data]); // Re-plot when data changes
+  }, [data, params]); // Re-plot when data changes
 
   if (!data) {
     return <div>Loading...</div>;

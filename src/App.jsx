@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 import TSTable from "./TSTable";
 import TSPlot from "./TSPlot";
@@ -7,13 +7,15 @@ import TSDropdown from "./TSDropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoadTime from "./LoadTime";
 
+
 const OFFICE = "SWT"
+const TS_FILTER = "*1Hour.0.Ccp-Rev";
 
 function App() {
   const [activeTab, setActiveTab] = useState("table");
   const [selectedTS, setSelectedTS] = useState(null);
   // TODO: Some way to set this in the UI perhaps?
-  const [tsCatalogParams, setTSParams] = useState({ office: OFFICE, like: "*1Hour.0.Ccp-Rev" });
+  const [tsCatalogParams, setTSParams] = useState({ office: OFFICE, like: TS_FILTER });
   const [tsPlotParams, setTSPlotParams] = useState(null);
   const [tsTableParams, setTSTableParams] = useState(null);
   const [loadTime, setLoadTime] = useState(null);

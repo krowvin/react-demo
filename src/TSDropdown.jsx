@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 
 import { useEffect, useState, useRef } from "react";
-import LoadTime from "./LoadTime";
 const CDA_ENDPOINT = "https://water.usace.army.mil/cwms-data";
 // Set some sort of limit for new users learning with this library
 // Ideally if you want users to have a large number of timeseries you would give pagination options to prevent overloading the server
@@ -77,9 +76,14 @@ const TSDropdown = ({ params, setSelectedTS, setLoadTime }) => {
     return <div>Error: {timeseries.error}</div>;
   } else if (timeseries?.entries?.length === 0) {
     return (
-      <div>
-        No Timeseries found for the query{" "}
-        {CDA_ENDPOINT + `/catalog/timeseries?${timeseries?.query_str}`}
+      <div className="m-2 text-center">
+        <span className="text-danger">No Timeseries found </span> for the query
+         <br />
+        {CDA_ENDPOINT +
+          `/catalog/timeseries?like=${params?.like}&office=${params?.office}`}
+        <br />
+        <br />
+        Be sure to also change the like filter of the TS_FILTER in App.jsx!
       </div>
     );
   }
