@@ -57,8 +57,8 @@ const TSPlot = ({ params, setLoadTime }) => {
 
       const layout = {
         title: params?.name || "Timeseries Plot",
-        xaxis: { title: "Time" },
-        yaxis: { title: "Value" },
+        xaxis: { title: "Date" },
+        yaxis: { title: params?.name.split(".")[1] },
       };
 
       Plotly.newPlot(plotContainerRef.current, plotData, layout);
