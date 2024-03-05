@@ -10,7 +10,7 @@ function LoadTime({ time, msg = "Load Time", inline = false }) {
     );
   else
     return (
-      <div>
+      <div className="text-center mt-1" title="Load times for timeseries catalog and data fetches from CDA.">
         {msg}: {time}
       </div>
     );

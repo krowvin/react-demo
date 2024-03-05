@@ -34,7 +34,7 @@ function App() {
   
   return (
     <>
-      <h1>CDA Demo + React</h1>
+      <h1>{OFFICE} - CDA Demo + React</h1>
       <TSDropdown
         params={tsCatalogParams}
         setSelectedTS={setSelectedTS}
