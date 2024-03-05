@@ -27,3 +27,4 @@ jobs:
           branch: gh-pages  
           folder: dist
           clean: true # Remove previous files
+          token: ${{ secrets.REACT_DEMO_DEPLOY_TOKEN }} # User defiend Personal Access Token
