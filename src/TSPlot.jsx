@@ -1,16 +1,18 @@
+/* eslint-disable react/prop-types */
+
 import { useEffect, useState, useRef } from "react";
 import Plotly from "plotly.js-basic-dist";
 
 const CDA_ENDPOINT = "https://water.usace.army.mil/cwms-data";
 
-const TSPlot = ({ params }) => {
+const TSPlot = ({ params, setLoadTime }) => {
   const [data, setData] = useState(null);
-  const plotContainerRef = useRef(null); // Create a ref for the plot container
-
+  const plotContainerRef = useRef(null);
   // Load the timeseries when the component loads in
   useEffect(() => {
     const queryString = new URLSearchParams(params).toString();
     const fetchData = async () => {
+      const startTime = window.performance.now();
       try {
         const response = await fetch(
           `${CDA_ENDPOINT}/timeseries?${queryString}`,
@@ -28,6 +30,9 @@ const TSPlot = ({ params }) => {
         const ts_data = await response.json();
         ts_data.query_str = queryString;
         setData(ts_data);
+        setLoadTime(
+          ((window.performance.now() - startTime) / 1000).toFixed(2)
+        );
       } catch (error) {
         console.error("Failed to fetch: ", error);
         setData({ error: error.message });
@@ -35,7 +40,7 @@ const TSPlot = ({ params }) => {
     };
 
     fetchData();
-  }, [params]);
+  }, [params, setLoadTime]);
 
   // Plot the data with Plotly
   useEffect(() => {
@@ -72,13 +77,12 @@ const TSPlot = ({ params }) => {
       </div>
     );
   }
-
   return (
     <div
       ref={plotContainerRef}
-      style={{ width: "100%", height: "400px" }}
+      style={{ width: "100%", height: "500px" }}
     ></div>
-  ); // This div will contain the plot
+  );
 };
 
 export default TSPlot;
